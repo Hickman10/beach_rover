@@ -17,9 +17,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  bool sorttime;
   if(Serial.available() > 0){ 
       command = Serial.read(); 
       stop();
+      Serial.println(command);
       switch(command){
       case 'F':  
         move_forward();
@@ -61,20 +63,28 @@ void stop(){
   digitalWrite(LeftMotorForward, LOW);
   digitalWrite(LeftMotorBackward, LOW);;
   delay(500);
+  digitalWrite(LiftUp, LOW);
+  digitalWrite(LiftDown, LOW);
+  delay(500);
 }
 
 void lift_bin(){
   // lift the trash for sorting using 
   digitalWrite(LiftUp, HIGH);
   digitalWrite(LiftDown, LOW);
-  delay();
+  delay(500);
+  digitalWrite(LiftUp, LOW);
+  digitalWrite(LiftDown, LOW);
+  delay(800);
 }
 
 void lower_bin(){
   // lower bin to collect incomming trash
   digitalWrite(LiftUp, LOW);
   digitalWrite(LiftDown, HIGH);\
-  delay();
+  delay(500);
+  digitalWrite(LiftUp, LOW);\
+  digitalWrite(LiftDown, LOW);
 }
 
 void shake(){
