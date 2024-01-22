@@ -1,10 +1,10 @@
-const int LeftMotorForward = 2;
-const int LeftMotorBackward = 3;
-const int LiftUp = 4;
-const int LiftDown = 5;
+const int LeftMotorForward = 4;
+const int LeftMotorBackward = 5;
+const int LiftUp = 2;
+const int LiftDown = 3;
 
-const int dirPin = 7;
-const int stepPin = 6;
+const int dirPin = 11;
+const int stepPin = 12;
 const int stepsPerRevolution = 10;
 
 const byte npulse = 12; // number of pulses to charge the capacitor before each measurement
@@ -45,7 +45,7 @@ void setup() {
   pinMode(pin_cap, INPUT);
   pinMode(pin_LED, OUTPUT);
   digitalWrite(pin_LED, LOW);
-  myservo.attach(12);
+  myservo.attach(13);
   myservo.write(90);
 
   pinMode(trigPin, OUTPUT);
@@ -136,8 +136,8 @@ void loop() {
 void move_forward(){
   //delay(2000);
 
-  digitalWrite(LeftMotorForward, LOW);
-  digitalWrite(LeftMotorBackward, HIGH);
+  digitalWrite(LeftMotorForward, HIGH);
+  digitalWrite(LeftMotorBackward, LOW);
   delay(500);
 }
 
@@ -146,8 +146,8 @@ void move_backward(){
 
   //delay(2000);
 
-  digitalWrite(LeftMotorForward, HIGH);
-  digitalWrite(LeftMotorBackward, LOW);;
+  digitalWrite(LeftMotorForward, LOW);
+  digitalWrite(LeftMotorBackward, HIGH);;
   delay(500);
 }
 
@@ -201,11 +201,11 @@ void shake(){
 	for(int x = 0; x < stepsPerRevolution; x++)
 	{
 		digitalWrite(stepPin, HIGH);
-		delayMicroseconds(500);
+		delayMicroseconds(2000);
 		digitalWrite(stepPin, LOW);
-		delayMicroseconds(500);
+		delayMicroseconds(2000);
 	}
-	delay(500); // Wait a second
+	delay(1000); // Wait a second
 	
 	// Set motor direction counterclockwise
 	digitalWrite(dirPin, LOW);
@@ -214,11 +214,11 @@ void shake(){
 	for(int x = 0; x < stepsPerRevolution; x++)
 	{
 		digitalWrite(stepPin, HIGH);
-		delayMicroseconds(500);
+		delayMicroseconds(1000);
 		digitalWrite(stepPin, LOW);
-		delayMicroseconds(500);
+		delayMicroseconds(1000);
 	}
-	delay(100); // Wait a second
+	delay(1000); // Wait a second
 }
 
 float calculateDistance() {
